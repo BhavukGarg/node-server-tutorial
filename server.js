@@ -2,6 +2,7 @@ const express=require('express')
 const fs=require('fs')
 const path=require('path')
 const hbs=require('hbs')
+const port=process.env.port|| 3000
 var app=express()
 app.set('view engine','hbs')
 app.set(express.static(__dirname+'/'))
@@ -38,6 +39,6 @@ app.get('/about',(req,res)=>{
     
         })
 
-app.listen(3000,()=>{
-    console.log('server is ready');
+app.listen(port,()=>{
+    console.log('server is ready on port '+port);
 });
