@@ -2,11 +2,12 @@ const express=require('express')
 const fs=require('fs')
 const path=require('path')
 const hbs=require('hbs')
-const port=process.env.PORT|| 3000;
+// const port=process.env.PORT|| 3000;
 var app=express()
 app.set('view engine','hbs')
 app.set(express.static(__dirname+'/'))
 hbs.registerPartials(path.join(__dirname,'/partials'))
+hbs.registerHelper('getPath',()=>{return __dirname})
 hbs.registerHelper('date',()=>{return 207})
 app.use((req,res,next)=>{
     var now=new Date().toString();
@@ -21,15 +22,19 @@ app.use((req,res,next)=>{
 // })
 
 app.get('/about',(req,res)=>{
-    res.send({
-        name:'bhavuk',
-        age:23
-    })
+    // res.send({
+    //     name:'bhavuk',
+    //     age:23
+    // })
+
+    res.render(path.join(__dirname,'/rendering.hbs'),{
+        num:2000
+    });
 
 
     })
     app.get('/',(req,res)=>{
-        res.render(path.join(__dirname,'/rendering.hbs'),{
+        res.render(path.join(__dirname,'/achievement.hbs'),{
             name:'BHAVUK GARG',
             age:18,
             year:new Date().getDate()
@@ -39,6 +44,6 @@ app.get('/about',(req,res)=>{
     
         })
 
-app.listen(port,()=>{
-    console.log('server is ready on port '+port);
+app.listen(3000,()=>{
+    console.log('server is ready on port 3000');
 });
